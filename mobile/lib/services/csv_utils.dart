@@ -3,7 +3,10 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 
-class CsvDecoder {
+///
+/// Utilities for work with csv files
+/// 
+class CsvUtils {
 
 
   Future<List<List>> getRawData(String fileName) async {
@@ -14,7 +17,7 @@ class CsvDecoder {
     return list;
  }
 
-  Future<List<List<dynamic>>> getRawData2(String fileName) async {
+  Future<List<List<dynamic>>> getRawCsvData(String fileName) async {
     final csvCodec = new CsvCodec();
     final input = rootBundle.loadString(fileName);
     return await input.asStream().transform(csvCodec.decoder).toList();

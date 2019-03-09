@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/services/csv_decoder.dart';
+import 'package:mobile/services/csv_utils.dart';
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
               }
               return CircularProgressIndicator();
             },
-            future: new CsvDecoder().getRawData2('assets/adm.txt'),
+            future: new CsvUtils().getRawCsvData('assets/text/adm.txt'),
           ),
         ),
       ),

@@ -14,7 +14,7 @@ import 'package:mobile/main.dart';
 import 'package:csv/csv.dart';
 import 'dart:convert';
 
-import 'package:mobile/services/csv_decoder.dart';
+import 'package:mobile/services/csv_utils.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
@@ -34,10 +34,12 @@ void main() {
     expect(find.text('1'), findsOneWidget);
   });
 
+  testWidgets('Dividend list from csv file test', (WidgetTester tester) async {
 
-  testWidgets('CsvTest', (WidgetTester tester) async {
-  CsvDecoder().getRawData("adm.txt");
-  sleep(Duration(seconds: 5));
+   await CsvUtils().getRawCsvData("assets/text/adm.txt").then((el){
+      print(el);
+    });
+
 
   });
 }

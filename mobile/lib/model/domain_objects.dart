@@ -1,3 +1,4 @@
+import 'package:mobile/data/dividends.dart';
 import 'package:money/money.dart';
 
 class Security {
@@ -12,11 +13,4 @@ class Security {
 
 }
 
-class Dividend {
 
-  DateTime dateTime;
-  Money amount;
-  double percent;
-
-  Dividend({this.dateTime, this.amount,this.percent});
-}
