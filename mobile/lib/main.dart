@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/data/dividends.dart';
 import 'package:mobile/services/csv_utils.dart';
 import 'dart:async';
 import 'dart:io';
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
           body: FutureBuilder(
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return Text(snapshot.data[0][0]);
+                // return Text(snapshot.data[0][0]);
+                return DividendList(snapshot.data);
               } else if (snapshot.hasError) {
                 return Text("${snapshot.error}");
               }
@@ -34,5 +36,27 @@ class MyApp extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class DividendList extends StatelessWidget {
+  List<Dividend> _divList;
+
+  DividendList(List<List<dynamic>> ls) {
+    _divList = DividendUtils.createDividendFromCsv(ls);
+  }
+
+  List<Card> divToTextConverter() {
+    return _divList.map((div) {
+      return Card(
+          color: Colors.white70,
+          child: ListTile(
+              leading: Text(div.fDate, style: TextStyle(fontSize: 16),), trailing: Text(div.amount.toString())));
+    }).toList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(children: divToTextConverter());
   }
 }

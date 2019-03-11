@@ -13,8 +13,10 @@ class DividendUtils {
     for (var i = 0; i < divList.length; i = i + 2) {
       dividends.add(Dividend(
           dateTime: DateTime.parse(divList[i]),
-          amount: Money.fromString(divList[i + 1], Currency("USD"))));
+          amount: Money.fromDouble(divList[i + 1], Currency("USD"))));
     }
+    dividends.sort();
+
     return dividends;
   }
   
@@ -45,13 +47,16 @@ class Dividend implements Comparable<Dividend>{
 
   @override
   int compareTo(Dividend other) {
-    return other.amount.compareTo(this.amount);
+    return other.dateTime.compareTo(this.dateTime);
   }
 
   @override
   String toString() {
+    return 'Dividend{dateTime: ${formatDate(dateTime, [yyyy, '-', mm, '-', dd])}, amount: $amount}';
+  }
 
-    return 'Dividend{dateTime: ${formatDate(dateTime, [yyyy, '-', mm, '-', dd])}, amount: $amount, percent: $percent}';
+  String get fDate {
+   return formatDate(dateTime, [yyyy, '-', mm, '-', dd]);
   }
 
 
